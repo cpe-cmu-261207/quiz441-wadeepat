@@ -107,7 +107,11 @@ app.post('/deposit',(req, res) => {
     const balance = users.find(user=>user.username===username)?.balance as number
     //const newbalance  = balance.+amount  as number
     //const user = users.find(user=>user.username===username)
-    const newbalance = balance + amount
+   
+    const newbalance = balance + amount 
+    users.forEach(function (user) {
+      if (user.username == username) user.balance = newbalance
+    });
     res.json({ 
       message: 'Deposit sucessfully',
       balance: newbalance
@@ -135,6 +139,9 @@ app.post('/withdraw',(req, res) => {
     //const newbalance  = balance.+amount  as number
     //const user = users.find(user=>user.username===username)
     const newbalance = balance - amount
+    users.forEach(function (user) {
+      if (user.username == username) user.balance = newbalance
+    });
     if(newbalance<0){
       res.status(400)
       res.json({
