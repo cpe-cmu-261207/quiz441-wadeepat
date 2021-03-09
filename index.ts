@@ -88,8 +88,8 @@ app.get('/balance', (req, res) => {
     }
   })
 
-app.post('/deposit', body('amount').isInt({ min: 1 }),(req, res) => {
-    const token = req.query
+app.post('/deposit',(req, res) => {
+    const token = req.query.token as string
     const amount = req.body.amount  as number
     //Is amount <= 0 ?
     if(amount<=0){
