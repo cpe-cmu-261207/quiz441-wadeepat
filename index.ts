@@ -89,7 +89,7 @@ app.get('/balance', (req, res) => {
   })
 
 app.post('/deposit', body('amount').isInt({ min: 1 }),(req, res) => {
-    const token = req.headers.authorization
+    const token = req.query
     const amount = req.body.amount  as number
     //Is amount <= 0 ?
     if(amount<=0){
@@ -115,7 +115,7 @@ app.post('/deposit', body('amount').isInt({ min: 1 }),(req, res) => {
 })
 
 app.post('/withdraw',(req, res) => {
-  const token = req.headers.authorization
+  const token = req.query.token as string
     const amount = req.body.amount  as number
     //Is amount <= 0 ?
     if(amount<=0){
